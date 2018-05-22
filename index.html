@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
-    <script src="assets/javascript/game.js"></script>
+    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script src="assets/javascript/game.js" async></script>
 </head>
 <body>
     <div class="container">
@@ -38,27 +38,27 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-6 col-lg-6 bg-success text-white" id="target_number">
-              NUMBER TO MATCH GOES HERE  
+            <div class="col-sm-6 col-lg-6 bg-success text-white">
+              <h1 id="target_number"></h1> 
             </div>
             <div class="col-sm-6 col-lg-6 bg-info text-white" id="wins_and_losses">
-                WINS AND LOSSES GO HERE
+                <h1>Wins and Losses</h1>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-6 col-lg-6">
+            <div class="col-sm-12 col-lg-12">
             <img class="img-fluid crystal" id="blue_crystal" src="assets/images/blue-gem.jpg">
             <img class="img-fluid crystal" id="green_crystal" src="assets/images/green-gem.jpg">
             </div>
-            <div class="col-sm-6 col-lg-6"></div>
-                <img class="img-fluid crystal" id="purple_crystal" src="assets/images/purple-gem.jpg">
-                <img class="img-fluid crystal" id="red_crystal" src="assets/images/red-gem.jpg">
+            <div class="col-sm-12 col-lg-12">
+            <img class="img-fluid crystal" id="purple_crystal" src="assets/images/purple-gem.jpg">
+            <img class="img-fluid crystal" id="red_crystal" src="assets/images/red-gem.jpg">
             </div>
         </div>
         <div class="row">
             <div class="col-sm-12 col-lg-12 bg-primary text-white">
-                <span>Your total score is:</span>
-                <span>Your score goes here</span>
+                <h1>Your total score is:</h1>
+                <span id="my_total_score"></span>
             </div>    
         </div>
     </div>

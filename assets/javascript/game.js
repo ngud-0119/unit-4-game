@@ -2,18 +2,18 @@
 
 var startingNumber = Math.floor((Math.random() * 120) + 19);
 var crystalValueArray = [];
-var wins = 0;
-var losses = 0;
+var numberOfWins = 0;
+var numberOfLosses = 0;
 var totalScore = 0;
+var newTotalScore;
+
+
+
 
 // when the game starts, generate a new number to add to.
-function newStartingNumber(){
-$("#target_number").html("Try to match this number:<br> " + startingNumber);
-}
 
-newStartingNumber();
 
-function assignCrystalValues(){
+function newCrystalValues(){
 while(crystalValueArray.length < 4){
     var randomnumber = Math.floor(Math.random()*12) + 1;
     if(crystalValueArray.indexOf(randomnumber) > -1) continue;
@@ -21,20 +21,39 @@ while(crystalValueArray.length < 4){
     }
 }
 
-assignCrystalValues();
 
-function logCrystalValue(id, index){
+
+function assignCrystalValue(id, index){
     $(id).attr("value", crystalValueArray[index]);
-    $(id).on("click", function (){
-        console.log(crystalValueArray[index]);
+    var crystalValue = $(id).attr("value");
+    $(id).on("click", function(){
+        crystalValue = parseInt(crystalValueArray[index]);
+        newTotalScore = (totalScore += crystalValue);
+        $("#total_score").html("Total Score: " + newTotalScore);
     });
 }
 
 // assign values to each one of the crystals
-logCrystalValue("#blue_crystal", 0);
-logCrystalValue("#green_crystal", 1);
-logCrystalValue("#purple_crystal", 2);
-logCrystalValue("#red_crystal", 3);
+
+window.onload = function gameStart(){
+    $("#total_score").html("Total Score: " + totalScore);
+    $("#target_number").html("Match this number: <br> " + startingNumber);
+    $("#total_wins").text("Wins: " + numberOfWins);
+    $("#total_losses").text("Losses: " + numberOfLosses);
+    newCrystalValues();
+    assignCrystalValue("#blue_crystal", 0);
+    assignCrystalValue("#green_crystal", 1);
+    assignCrystalValue("#purple_crystal", 2);
+    assignCrystalValue("#red_crystal", 3);
+}
+
+if (newTotalScore === startingNumber){
+    numberOfWins++;
+    alert("YOU WIN!!");
+}
+
+
+
 
 // when one of the crystals is clicked, add the value to the crystal to the total on the bottom of the page.
 

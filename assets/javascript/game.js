@@ -1,6 +1,6 @@
 // declaring variables for the various objects
 
-var startingNumber = Math.floor((Math.random() * 120) + 19);
+var startingNumber;
 var crystalValueArray = [];
 var numberOfWins = 0;
 var numberOfLosses = 0;
@@ -8,10 +8,20 @@ var totalScore = 0;
 var newTotalScore;
 
 
-$("#target_number").html("Match this number: <br> " + startingNumber);
-
 // when the game starts, generate a new number to add to.
-
+function gameStart(){
+    startingNumber = Math.floor((Math.random() * 120) + 19);
+    totalScore = 0;
+    $("#target_number").html("Match this number: <br> " + startingNumber);
+    $("#total_score").text("Total Score: " + totalScore);
+    $("#total_wins").text("Wins: " + numberOfWins);
+    $("#total_losses").text("Losses: " + numberOfLosses);
+    newCrystalValues();
+    assignCrystalValue("#blue_crystal", 0);
+    assignCrystalValue("#green_crystal", 1);
+    assignCrystalValue("#purple_crystal", 2);
+    assignCrystalValue("#red_crystal", 3);
+}
 
 function newCrystalValues(){
 while(crystalValueArray.length < 4){
@@ -23,36 +33,30 @@ while(crystalValueArray.length < 4){
 
 function addingTotalScore(){
     var crystalValue = parseInt($(this).attr("value"));
-    newTotalScore = (totalScore += crystalValue);
-    $("#total_score").html("Total Score: " + newTotalScore);
+    totalScore += crystalValue;
+    $("#total_score").html("Total Score: " + totalScore);
+    if (totalScore === startingNumber){
+        numberOfWins++;
+        gameStart();
+        
+    }
+    else if (totalScore > startingNumber){
+        numberOfLosses++;
+        gameStart();
+    }
 };
 
 
 function assignCrystalValue(id, index){
     $(id).attr("value", crystalValueArray[index]);
     $(id).on("click", addingTotalScore);
-    if (newTotalScore === startingNumber){
-        numberOfWins++;
-        alert("YOU WIN!!");
-    }
-    else if (newTotalScore > startingNumber){
-        alert("You Lose!!");
-        numberOfLosses++;
-    }
 }
 
 // assign values to each one of the crystals
 
-window.onload = function gameStart(){
-    $("#total_score").html("Total Score: " + totalScore);
-    $("#total_wins").text("Wins: " + numberOfWins);
-    $("#total_losses").text("Losses: " + numberOfLosses);
-    newCrystalValues();
-    assignCrystalValue("#blue_crystal", 0);
-    assignCrystalValue("#green_crystal", 1);
-    assignCrystalValue("#purple_crystal", 2);
-    assignCrystalValue("#red_crystal", 3);
-}
+window.onload = gameStart;
+
+console.log(crystalValueArray);
 
 
 

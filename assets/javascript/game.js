@@ -23,13 +23,24 @@ function gameStart(){
     assignCrystalValue("#red_crystal", 3);
 }
 
-function newCrystalValues(){
-while(crystalValueArray.length < 4){
-    var randomnumber = Math.floor(Math.random()*12) + 1;
-    if(crystalValueArray.indexOf(randomnumber) > -1) continue;
-    crystalValueArray[crystalValueArray.length] = randomnumber;
-    }
+function gameReset(){
+    startingNumber = Math.floor((Math.random() * 120) + 19);
+    $("#target_number").html("Match this number: <br> " + startingNumber);
+    totalScore = 0;
+    $("#total_score").text("Total Score: " + totalScore);
+    $("#total_wins").text("Wins: " + numberOfWins);
+    $("#total_losses").text("Losses: " + numberOfLosses);
+    crystalValueArray = [];
+    newCrystalValues();
 }
+
+function newCrystalValues(){
+    for (var i = 0; i < 4; i++) {
+            randomNumber = Math.floor((Math.random() * 12) + 1);
+            crystalValueArray.push(randomNumber);
+        }
+        console.log(crystalValueArray);
+    }
 
 function addingTotalScore(){
     var crystalValue = parseInt($(this).attr("value"));
@@ -37,12 +48,11 @@ function addingTotalScore(){
     $("#total_score").html("Total Score: " + totalScore);
     if (totalScore === startingNumber){
         numberOfWins++;
-        gameStart();
-        
+        gameReset(); 
     }
     else if (totalScore > startingNumber){
         numberOfLosses++;
-        gameStart();
+        gameReset();
     }
 };
 
@@ -55,8 +65,6 @@ function assignCrystalValue(id, index){
 // assign values to each one of the crystals
 
 window.onload = gameStart;
-
-console.log(crystalValueArray);
 
 
 

@@ -17,6 +17,7 @@ var randomNumber = Math.floor((Math.random() * 12) + 1);
 function gameStart(){
     startingNumber = Math.floor((Math.random() * 120) + 19);
     totalScore = 0;
+    $(".crystal").on("click", addingTotalScore);
     $("#target_number").html("Match this number: <br> " + startingNumber);
     $("#total_score").text("Total Score: " + totalScore);
     $("#total_wins").text("Wins: " + numberOfWins);
@@ -67,5 +68,5 @@ function addingTotalScore(){
 }
 
 // assign values to each one of the crystals
-$(".crystal").on("click", addingTotalScore);
+
 window.onload = gameStart;

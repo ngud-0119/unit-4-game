@@ -17,7 +17,6 @@ var randomNumber = Math.floor((Math.random() * 12) + 1);
 function gameStart(){
     startingNumber = Math.floor((Math.random() * 120) + 19);
     totalScore = 0;
-    $(".crystal").on("click", addingTotalScore);
     $("#target_number").html("Match this number: <br> " + startingNumber);
     $("#total_score").text("Total Score: " + totalScore);
     $("#total_wins").text("Wins: " + numberOfWins);
@@ -26,20 +25,6 @@ function gameStart(){
     newRandomNumbers("#green_crystal");
     newRandomNumbers("#purple_crystal");
     newRandomNumbers("#red_crystal");
-}
-
-function gameReset(){
-    startingNumber = Math.floor((Math.random() * 120) + 19);
-    $("#target_number").html("Match this number: <br> " + startingNumber);
-    totalScore = 0;
-    newRandomNumbers("#blue_crystal");
-    newRandomNumbers("#green_crystal");
-    newRandomNumbers("#purple_crystal");
-    newRandomNumbers("#red_crystal");
-    $("#total_score").text("Total Score: " + totalScore);
-    $("#total_wins").text("Wins: " + numberOfWins);
-    $("#total_losses").text("Losses: " + numberOfLosses);
-
 }
 
 function newRandomNumbers(id){
@@ -56,17 +41,22 @@ function addingTotalScore(){
     $("#total_score").html("Total Score: " + totalScore);
     if (totalScore === startingNumber){
         numberOfWins++;
-        gameReset(); 
+        gameStart();
     }
     else if (totalScore > startingNumber){
         numberOfLosses++;
-        gameReset();
+        gameStart();
     }
 
 
 
 }
 
+function crystalClick(){
+    $(".crystal").on("click", addingTotalScore);
+    gameStart();
+}
+
 // assign values to each one of the crystals
 
-window.onload = gameStart;
+window.onload = crystalClick;

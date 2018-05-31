@@ -52,11 +52,11 @@ function addingTotalScore(){
 
 }
 
-function crystalClick(){
+function onPageLoad(){
     $(".crystal").on("click", addingTotalScore);
     gameStart();
 }
 
 // assign values to each one of the crystals
 
-window.onload = crystalClick;
+window.onload = onPageLoad;

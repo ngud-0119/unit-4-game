@@ -1,5 +1,3 @@
-// declaring variables for the various objects
-
 var startingNumber;
 var crystalValues;
 var newValueArray = [];
@@ -10,10 +8,6 @@ var newTotalScore;
 var newValues;
 var randomNumber = Math.floor((Math.random() * 12) + 1);
 
-
-
-
-// when the game starts, generate a new number to add to.
 function gameStart(){
     startingNumber = Math.floor((Math.random() * 120) + 19);
     totalScore = 0;
@@ -26,15 +20,12 @@ function gameStart(){
     newRandomNumbers("#purple_crystal");
     newRandomNumbers("#red_crystal");
 }
-
 function newRandomNumbers(id){
     for (i = 0; i < 4; i++){
         randomNumber = Math.floor((Math.random() * 12) + 1); 
     }
     $(id).attr("value", randomNumber);
 }
-
-
 function addingTotalScore(){
     var crystalValue = parseInt($(this).attr("value"));
     totalScore += crystalValue;
@@ -47,16 +38,9 @@ function addingTotalScore(){
         numberOfLosses++;
         gameStart();
     }
-
-
-
 }
-
 function onPageLoad(){
     $(".crystal").on("click", addingTotalScore);
     gameStart();
 }
-
-// assign values to each one of the crystals
-
 window.onload = onPageLoad;
